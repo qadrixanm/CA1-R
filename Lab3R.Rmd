@@ -1,0 +1,88 @@
+
+IQR Temprature
+
+```{r}
+#Input dataset numeric weather into a dataframe.
+weathernum <-read.table(file ="C:/Rdatasets/weathernumeric.txt", stringsAsFactors=FALSE, sep =",",
+header=TRUE)
+#Show the first 10 records and all the columns
+weathernum[1:10,]
+
+#Examine the 5 number summary statistics with mean for temperature and humidity. From this calculate the interquartile range
+
+summary(weathernum$temperature)
+
+summary(weathernum$humidity)
+
+#For you to do! By hand, calculate the IQR for these dimensions. Are there any outliers for these variables? Use the IQR method to detect outliers = 
+# Humidity Q3 - Q1 
+# IQR 90 - 71 = 18.75 
+# Q3 + 18.75 = 90 + (18.75) 1.5 = 43.125 outlier for humidity 
+#
+#Temp IQR = 78.75 - 69.25 = 9.5 
+# Q3 + 9.5 = 78.75 + (9.5) 1.5 = 93 outliers for temp
+
+
+#zScore Standardisation
+zscore.humidity <-(weathernum$humidity mean(weathernum$humidity))/sd(weathernum$humidity)
+
+summary(zscore.humidity)
+
+#For you to do!??? What are the ranges for this variable for both normalisation methods? Do you think there are any outliers? min max normalization (0 < x < 1) 
+#min max normalization 
+#zscore (-4 < x < 4, but -3 < x <3 without outliers)
+#anwer
+#   No. their are no outliers here as it does not go over 3
+
+#Write the R formula to decimal scale weathernum$humidity attribute. Hint use nchar function.Examine the summary statistics afterwards. Note any observations  
+
+#Read in the cars2 dataset and transform weightlbs in different ways
+cars2 <- read.csv(file="c:/rdatasets/cars2.txt", stringsAsFactors=FALSE)
+
+#Natural Log Transformation
+natlog.weightlbs <- log(cars2$weightlbs)
+natlog.weightlbs
+
+#Square Root Transformation
+sqrt.weightlbs <- sqrt(cars2$weightlbs)
+sqrt.weightlbs
+
+#Inverse Square Root Transformation
+invsqrt.weightlbs <- 1/sqrt(cars2$weightlbs)
+invsqrt.weightlbs
+
+#For you to do!!
+#1 Using R calculate the skewness for the car weightlbs attribute
+weightSkewness <- 3* (mean(cars2$weightlbs) - median(cars2$weightlbs))/ sd(cars2$weightlbs)
+
+weightSkewness
+
+#2 Using R find the skewness for the natural log transformation of the car weightlbs attribute skewness = 3(mean = median) / standard deviation
+
+weightlog <- log(weightSkewness)
+weightlog
+
+#3 Using R find the skewness for the square root transformation of the car weightlbs attribute
+
+skewqrt <- sqrt(weightSkewness)
+
+#4 Using R find the skewness for the inverse square root transformation of the car weightlbs attribute
+
+skewinverssqrt <- 1/sqrt(weightSkewness)
+skewinverssqrt
+
+#5 Now re-calculate skewness using 1 or 2 (normality) transformation methods but with car weightlbs normalised using Min-Max Normalisation. Interpret your results. What do you concur?
+#min / max normalization  = (x - min(x))  / (max(x) - min(x))
+mmnom.weight = (cars2$weightlbs - min (cars2$weightlbs)) / (max(cars2$weightlbs) - min(cars2$weightlbs))
+mmnom.weight
+
+weightSkewness.mmnom <- 3* (mean(cars2$weightlbs) - median(cars2$weightlbs))/ sd(cars2$weightlbs)
+weightSkewness.mmnom
+
+#z-score = (x - mean(x)) / sd(x)
+zscore.weight  = (cars2$weightlbs - (mean(cars2$weightlbs)) / sd(cars2$weightlbs))
+zscore.weight
+
+
+```
+

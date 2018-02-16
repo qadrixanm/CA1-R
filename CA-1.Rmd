@@ -1,0 +1,216 @@
+
+#predictor variables 
+#Age	        Numeric	3/1827
+#Job	        Nominal	0%
+#Martial	    Nominal	0%
+#Education	    Nominal	4/1827 
+#Housing	    Nominal	0%
+#Loan	        Nominal	0%
+#Contact	    Nominal	0%
+#Month	        Nominal	0%
+#Day_Of_Week	Nominal	0%
+#Duration	    Numeric	0%
+#Campaign	    Numeric	0%
+#P_Days	        Numeric	0%
+#Previous	    Nominal	0%
+#Poutcome 	    Numeric	0%
+#Cons_Price	    Numeric	9/1827 = 0.0049 
+#Cons_Confs	    Numeric	0.0043%
+#Euribor3m	    Numeric	0%
+#Nr_Employed    Numeric	0%
+#Y 	            Nominal	0%
+
+#Percentages for missing values 
+sum(is.na(BANKINGrel$age))/prod(dim(BANKINGrel$age))/nrow(BANKINGrel)
+sum(is.na(BANKINGrel$education))/prod(dim(BANKINGrel$education))/nrow(BANKINGrel)
+sum(is.na(BANKINGrel$cons.price.idx))/prod(dim(BANKINGrel$cons.price.idx))/nrow(BANKINGrel)
+sum(is.na(BANKINGrel$cons.conf.idx))/prod(dim(BANKINGrel$cons.conf.idx))/nrow(BANKINGrel)
+
+#part c Max Min Mean Median 
+
+summary(BANKINGrel$age)
+# Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  18.00   32.00   38.00   39.93   47.00   88.00       3 
+
+summary(BANKINGrel$job)
+# admin.   blue-collar  entrepreneur     housemaid    management 
+          443           399            71            41           139 
+      retired self-employed      services       student    technician 
+           81            67           175            42           290 
+   unemployed          NA's 
+           55            24
+           
+summary(BANKINGrel$marital)
+# divorced  married   single     NA's 
+     199     1099      523        6 
+
+summary(BANKINGrel$education)
+#                              basic.4y            basic.6y            basic.9y 
+                  4                 186                 110                 262 
+        high.school professional.course   university.degree                NA's 
+                416                 206                 547                  96 
+
+
+summary(BANKINGrel$housing)
+# no  yes NA's 
+ 798  978   51
+
+summary(BANKINGrel$loan)
+# no  yes NA's 
+1474  302   51 
+
+summary(BANKINGrel$contact)
+#     cell  cellular telephone 
+        2      1158       667
+
+summary(BANKINGrel$month)
+# apr aug dec jul jun mar may nov oct sep 
+  103 270   8 325 224  14 652 179  24  28
+
+summary(BANKINGrel$day_of_week)
+# fri mon thu tue wed 
+  308 366 394 383 376 
+
+summary(BANKINGrel$duration)
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    4.0   101.5   181.0   257.1   319.5  3253.0 
+
+summary(BANKINGrel$campaign)
+#  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.000   1.000   2.000   2.552   3.000  22.000 
+  
+summary(BANKINGrel$poutcome)
+#   failure nonexistent     success 
+        197        1567          63 
+summary(BANKINGrel$cons.price.idx)
+#  Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  92.20   93.08   93.92   93.60   93.99   95.60       9 
+  
+summary(BANKINGrel$cons.conf.idx)
+#  Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ -50.80  -42.70  -41.80  -40.63  -36.40  -26.90       8 
+ 
+summary(BANKINGrel$euribor3m)
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.635   1.334   4.857   3.618   4.961   5.045 
+  
+summary(BANKINGrel$nr.employed)
+#  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   4964    5099    5191    5166    5228    5228
+summary(BANKINGrel$y)
+#  no  yes 
+1636  191 
+
+###part C Mode
+
+getmode <- function(x) {
+   ux <- unique(x)
+   ux[which.max(tabulate(match(x, ux)))]
+}
+
+getmode(BANKINGrel$age) 
+# [1] 32
+
+getmode(BANKINGrel$job)
+# [1] admin
+
+getmode(BANKINGrel$marital)
+# [1] married
+
+getmode(BANKINGrel$education)
+# [1] university.degree
+
+getmode(BANKINGrel$housing)
+# [1] yes
+
+getmode(BANKINGrel$loan)
+# [1] No
+
+getmode(BANKINGrel$contact)
+# [1] cellular
+
+getmode(BANKINGrel$month)
+# [1] may
+
+getmode(BANKINGrel$day_of_week)
+# [1] thu
+
+getmode(BANKINGrel$duration)
+# [1] 73
+
+getmode(BANKINGrel$campaign)
+# [1] 1
+
+getmode(BANKINGrel$pdays)
+# [1] 999
+
+getmode(BANKINGrel$previous)
+# [1] 0
+
+getmode(BANKINGrel$poutcome)
+# [1] nonexistent
+
+getmode(BANKINGrel$cons.price.idx)
+# [1] 93.994
+
+getmode(BANKINGrel$cons.conf.idx)
+# [1] -36.4
+
+getmode(BANKINGrel$euribor3m)
+# [1] 4.857
+
+getmode(BANKINGrel$nr.employed)
+# [1] 5228.1
+
+
+***** part c standard deviation*****
+sd(BANKINGrel$age, na.rm = T)
+#  10.47228
+
+sd(BANKINGrel$job, na.rm = T)
+# 3.550069
+
+sd(BANKINGrel$marital, na.rm = T)
+# 0.6041762
+
+sd(BANKINGrel$education, na.rm = T)
+# 1.665635
+
+sd(BANKINGrel$housing, na.rm = T)
+#  0.4975654
+
+sd(BANKINGrel$loan, na.rm = T)
+# 0.3757782
+
+sd(BANKINGrel$contact, na.rm = T)
+#  0.4835465
+
+sd(BANKINGrel$month, na.rm = T)
+# 2.29283
+
+sd(BANKINGrel$day_of_week, na.rm = T)
+#  1.378958
+
+sd(BANKINGrel$duration, na.rm = T)
+# 257.175
+
+sd(BANKINGrel$poutcome, na.rm = T)
+# 0.3701424
+
+sd(BANKINGrel$cons.price.idx, na.rm = T)
+#  0.5753015
+
+sd(BANKINGrel$cons.conf.idx, na.rm = T)
+# 4.549258
+
+sd(BANKINGrel$euribor3m, na.rm = T)
+# 1.736966
+
+sd(BANKINGrel$nr.employed, na.rm = T)
+# 73.99906
+
+sd(BANKINGrel$y, na.rm = T)
+#  0.3060474
+
+
+
